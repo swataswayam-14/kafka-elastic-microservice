@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon src/server.ts",
-    "start":"node dist/server.js",
-    "compile":"tsc -b"
+    "start": "node dist/server.js",
+    "compile": "tsc -b"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +14,17 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/rosie": "^0.0.45",
+    "@types/supertest": "^6.0.2",
     "express": "^4.19.2",
-    "nodemon": "^3.1.4"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "rosie": "^2.1.1",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.3"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1"
   }
 }

@@ -8,7 +8,13 @@ export class CatalogService {
         this._repository = repository;
     }
 
-    createProduct(input:any){}
+    async createProduct(input:any){
+        const data = await this._repository.create(input);
+        if(!data.id) {
+            throw new Error("Unable to create product");
+        }
+        return data;
+    }
 
     updateProduct(input:any){}
 
