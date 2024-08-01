@@ -127,12 +127,30 @@ describe("catalogService", ()=>{
             const result = await service.getProduct(product.id!);
             expect(result).toMatchObject(product);
         });
-        test.only("should throw error with product does not exist", async () => {
+        test("should throw error with product does not exist", async () => {
             const service = new CatalogService(repository);
             const product = productFactory.build();
             jest.spyOn(repository, "findOne").mockImplementationOnce(() => Promise.reject(new Error("product does not exist")));
             await expect(service.getProduct(product.id!)).rejects.toThrow("product does not exist");
         });
     });
+
+    describe("deleteProduct", () => {
+        test("should delete product by id", async () => {
+            const service = new CatalogService(repository);
+            const product = productFactory.build();
+            jest.spyOn(repository, "delete").mockImplementationOnce(()=> Promise.resolve({id:product.id}));
+            const result = await service.deleteProduct(product.id!);
+            expect(result).toMatchObject({
+                id:product.id
+            })
+        })
+        test("should throw error with product does not exist", async () => {
+            const service = new CatalogService(repository);
+            const product = productFactory.build();
+            jest.spyOn(repository, "delete").mockImplementationOnce(()=> Promise.reject(new Error("The product does not exist")));
+            await expect(service.deleteProduct(product.id!)).rejects.toThrow("product does not exist");
+        })
+    })
     
 });
